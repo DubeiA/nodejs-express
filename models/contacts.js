@@ -29,22 +29,22 @@ const addContact = async (data) => {
 
 const updateContact = async (id, body) => {
   const contacts = await listContacts();
-  const idx = contacts.findIndex((item) => item.id === id);
-  if (idx === -1) {
+  const searchContact = contacts.findIndex((item) => item.id === id);
+  if (searchContact === -1) {
     return null;
   }
-  contacts[idx] = { id, ...body };
+  contacts[searchContact] = { id, ...body };
   await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
-  return contacts[idx];
+  return contacts[searchContact];
 };
 
 const removeContact = async (id) => {
   const contacts = await listContacts();
-  const idx = contacts.findIndex((item) => item.id === id);
-  if (idx === -1) {
+  const searchContact = contacts.findIndex((item) => item.id === id);
+  if (searchContact === -1) {
     return null;
   }
-  const [result] = contacts.splice(idx, 1);
+  const [result] = contacts.splice(searchContact, 1);
 
   await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
   return result;
