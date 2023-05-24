@@ -34,7 +34,7 @@ const contactSchema = new Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
+
       lowercase: true,
       validate: {
         validator: function (email) {
@@ -48,7 +48,6 @@ const contactSchema = new Schema(
     phone: {
       type: String,
       required: true,
-      unique: true,
       validate: {
         validator: function (phone) {
           const phoneRegex = contactRegex;
@@ -61,6 +60,11 @@ const contactSchema = new Schema(
     favorite: {
       type: Boolean,
       default: false,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      require: true,
     },
   },
   { versionKey: false, timestamps: true }
