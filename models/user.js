@@ -39,8 +39,13 @@ const registerSchema = Joi.object({
   password: Joi.string().min(5).required(),
 });
 
+const subscriptionSchema = Joi.object({
+  subscription: Joi.string().valid("starter", "pro", "business").required(),
+});
+
 const schemas = {
   registerSchema,
+  subscriptionSchema,
 };
 
 const User = model("user", userSchema);
@@ -49,7 +54,3 @@ module.exports = {
   User,
   schemas,
 };
-
-// const favoriteJoiSchema = Joi.object({
-//   favorite: Joi.boolean().required(),
-// });
